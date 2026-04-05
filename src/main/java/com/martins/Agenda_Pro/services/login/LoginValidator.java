@@ -6,8 +6,8 @@ public class LoginValidator {
 
   @Bean
   public static void validate(LoginRequestDTO request) {
-    if (request.getUsername() == null || request.getUsername().isBlank()) {
-      throw new IllegalArgumentException("Username não encontrado");
+    if (request.getEmail() == null || request.getEmail().isBlank()) {
+      throw new IllegalArgumentException("email não encontrado");
     }
 
     if (request.getPassword() == null || request.getPassword().isBlank()) {

@@ -11,7 +11,7 @@ import com.martins.Agenda_Pro.services.login.LoginValidator;
 class LoginValidatorTest {
 
   @Test
-  void deveLancarErroQuandoUsernameForNulo() {
+  void deveLancarErroQuandoEmailForNulo() {
     LoginRequestDTO dto = new LoginRequestDTO();
     dto.setPassword("password");
 
@@ -19,13 +19,13 @@ class LoginValidatorTest {
       LoginValidator.validate(dto);
     });
 
-    assertEquals("Username não encontrado", ex.getMessage());
+    assertEquals("email não encontrado", ex.getMessage());
   }
 
   @Test
   void deveLancarErroQuandoPasswordForNulo() {
     LoginRequestDTO dto = new LoginRequestDTO();
-    dto.setUsername("Username");
+    dto.setEmail("email");
 
     Exception ex = assertThrows(IllegalArgumentException.class, () -> {
       LoginValidator.validate(dto);
