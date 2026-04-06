@@ -23,7 +23,7 @@ services:
       - 5432:5432
     volumes:
       - postgres:/var/lib/postgresql/data
-      - ./Agenda-Pro-Main/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
         - agendaprojava
     healthcheck:
