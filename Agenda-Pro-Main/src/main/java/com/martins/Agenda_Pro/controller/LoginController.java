@@ -1,5 +1,6 @@
 package com.martins.Agenda_Pro.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ public class LoginController {
   }
 
   @PostMapping("/login")
-  public String AuthenticateUser(@RequestBody LoginRequestDTO request) {
+  public Map<String, String> AuthenticateUser(@RequestBody LoginRequestDTO request) {
 
     // Valida se email e password foram recebidos
     LoginValidator.validate(request);
@@ -35,6 +36,9 @@ public class LoginController {
     JwtEncode encode = new JwtEncode();
     String token = encode.generateToken(claims);
 
-    return token;
+    Map<String, String> response = new HashMap<>();
+    response.put("token", token);
+
+    return response;
   }
 }
