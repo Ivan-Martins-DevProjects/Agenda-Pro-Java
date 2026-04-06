@@ -26,7 +26,6 @@ public class LoginController {
 
   @PostMapping("/login")
   public Map<String, String> AuthenticateUser(@RequestBody LoginRequestDTO request) {
-
     // Valida se email e password foram recebidos
     LoginValidator.validate(request);
 

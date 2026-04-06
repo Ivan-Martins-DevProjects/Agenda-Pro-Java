@@ -34,7 +34,7 @@ public class LoginControllerMockTest {
     requestDTO.setPassword("123456");
 
     // Chama o método
-    String token = controller.AuthenticateUser(requestDTO);
+    Map<String, String> token = controller.AuthenticateUser(requestDTO);
 
     // Validação simples
     assertNotNull(token);
