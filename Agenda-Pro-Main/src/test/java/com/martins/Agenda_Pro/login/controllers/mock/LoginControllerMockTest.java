@@ -1,6 +1,7 @@
 package com.martins.Agenda_Pro.login.controllers.mock;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -11,6 +12,8 @@ import com.martins.Agenda_Pro.controller.LoginController;
 import com.martins.Agenda_Pro.repository.login.table.User;
 import com.martins.Agenda_Pro.services.login.LoginRequestDTO;
 import com.martins.Agenda_Pro.services.login.LoginService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 public class LoginControllerMockTest {
 
@@ -34,7 +37,8 @@ public class LoginControllerMockTest {
     requestDTO.setPassword("123456");
 
     // Chama o método
-    Map<String, String> token = controller.AuthenticateUser(requestDTO);
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    ResponseEntity<Map<String, String>> token = controller.AuthenticateUser(requestDTO, request);
 
     // Validação simples
     assertNotNull(token);
