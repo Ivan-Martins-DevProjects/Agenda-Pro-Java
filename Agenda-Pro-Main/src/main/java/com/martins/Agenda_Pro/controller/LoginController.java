@@ -42,7 +42,8 @@ public class LoginController {
 
       User user = service.buscarPorEmail(request.getEmail());
 
-      boolean res = hashing.verifyPassword(user.getPassword(), request.getPassword());
+      boolean res = hashing.verifyPassword(user.getPassword(),
+          request.getPassword());
       if (!res) {
         throw new LoginException("Credenciais inválidas", null);
       }
