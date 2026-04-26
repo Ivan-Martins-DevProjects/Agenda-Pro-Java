@@ -56,7 +56,7 @@ public class LoginController {
       String token = encode.generateToken(claims);
 
       return ResponseEntity
-          .ok(new LoginResponse("Sucesso", token));
+          .ok(new LoginResponse("sucesso", token));
 
     } catch (MainError e) {
       return ResponseEntity
