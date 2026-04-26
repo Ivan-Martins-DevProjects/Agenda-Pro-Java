@@ -20,8 +20,6 @@ import com.martins.Agenda_Pro.services.login.LoginRequestDTO;
 import com.martins.Agenda_Pro.services.login.LoginService;
 import com.martins.Agenda_Pro.services.login.LoginValidator;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -35,8 +33,7 @@ public class LoginController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<ResponseModel> AuthenticateUser(@RequestBody LoginRequestDTO request,
-      HttpServletRequest server) {
+  public ResponseEntity<ResponseModel> AuthenticateUser(@RequestBody LoginRequestDTO request) {
     try {
       // Valida se email e password foram recebidos
       LoginValidator.validate(request);
