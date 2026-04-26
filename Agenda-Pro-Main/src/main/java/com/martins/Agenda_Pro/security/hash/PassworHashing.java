@@ -2,13 +2,19 @@ package com.martins.Agenda_Pro.security.hash;
 
 import java.nio.charset.StandardCharsets;
 
+import org.springframework.stereotype.Service;
+
 import com.martins.Agenda_Pro.errors.PasswordHashException;
 
 import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 
+@Service
 public class PassworHashing {
-  Argon2 argonType = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+  private final Argon2 argonType;
+
+  public PassworHashing(Argon2 argonType) {
+    this.argonType = argonType;
+  }
 
   public boolean verifyPassword(String hash, String password) {
     byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
