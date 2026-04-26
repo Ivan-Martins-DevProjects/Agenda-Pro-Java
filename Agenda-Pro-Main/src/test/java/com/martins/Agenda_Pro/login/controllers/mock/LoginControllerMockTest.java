@@ -10,6 +10,8 @@ import java.util.Map;
 
 import com.martins.Agenda_Pro.controller.LoginController;
 import com.martins.Agenda_Pro.repository.login.table.User;
+import com.martins.Agenda_Pro.responses.ResponseModel;
+import com.martins.Agenda_Pro.security.hash.PassworHashing;
 import com.martins.Agenda_Pro.services.login.LoginRequestDTO;
 import com.martins.Agenda_Pro.services.login.LoginService;
 
@@ -20,6 +22,7 @@ public class LoginControllerMockTest {
   @Test
   void AuthenticateUserTest() {
     LoginService mockService = mock(LoginService.class);
+    PassworHashing mockHashing = mock(PassworHashing.class);
 
     // Mock do usuário
     User mockUser = mock(User.class);
@@ -29,7 +32,7 @@ public class LoginControllerMockTest {
     when(mockService.buscarPorEmail("teste@ex.com")).thenReturn(mockUser);
 
     // Controler real usando serviço mockado
-    LoginController controller = new LoginController(mockService);
+    LoginController controller = new LoginController(mockService, mockHashing);
 
     // DTO de teste
     LoginRequestDTO requestDTO = new LoginRequestDTO();
@@ -38,7 +41,7 @@ public class LoginControllerMockTest {
 
     // Chama o método
     HttpServletRequest request = mock(HttpServletRequest.class);
-    ResponseEntity<Map<String, String>> token = controller.AuthenticateUser(requestDTO, request);
+    ResponseEntity<ResponseModel> token = controller.AuthenticateUser(requestDTO, request);
 
     // Validação simples
     assertNotNull(token);
