@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.martins.Agenda_Pro.controller.entities.LoginResponse;
 import com.martins.Agenda_Pro.errors.LoginException;
+import com.martins.Agenda_Pro.errors.MainError;
 import com.martins.Agenda_Pro.repository.login.table.User;
 import com.martins.Agenda_Pro.responses.ErrorResponse;
 import com.martins.Agenda_Pro.responses.ResponseModel;
@@ -45,7 +46,7 @@ public class LoginController {
       boolean res = hashing.verifyPassword(user.getPassword(),
           request.getPassword());
       if (!res) {
-        throw new LoginException("Credenciais inválidas", null);
+        throw new LoginException(400, "Credenciais inválidas");
       }
 
       Map<String, String> claims = user.CreateJwtClaims();
@@ -54,12 +55,18 @@ public class LoginController {
 
       String token = encode.generateToken(claims);
 
-      LoginResponse response = new LoginResponse("Sucesso", token);
-      return ResponseEntity.ok(response);
+      return ResponseEntity
+          .ok(new LoginResponse("Sucesso", token));
+
+    } catch (MainError e) {
+      return ResponseEntity
+          .status(e.getStatus())
+          .body(new ErrorResponse("error", e.getMessage()));
 
     } catch (Exception e) {
-      ErrorResponse response = new ErrorResponse("error", e.getMessage());
-      return ResponseEntity.status(500).body(response);
+      return ResponseEntity
+          .status(500)
+          .body(new ErrorResponse("error", e.getMessage()));
     }
   }
 

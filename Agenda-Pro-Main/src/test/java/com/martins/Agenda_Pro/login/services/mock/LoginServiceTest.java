@@ -3,6 +3,8 @@ package com.martins.Agenda_Pro.login.services.mock;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import com.martins.Agenda_Pro.errors.MainError;
+import com.martins.Agenda_Pro.errors.UserNotFound;
 import com.martins.Agenda_Pro.repository.login.LoginRepository;
 import com.martins.Agenda_Pro.repository.login.table.User;
 import com.martins.Agenda_Pro.services.login.LoginService;
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class LoginServiceTest {
 
   @Test
-  void testBuscarPorEmail_Sucesso() {
+  void testBuscarPorEmailSucesso() {
     // Mock do repository
     LoginRepository mockRepository = mock(LoginRepository.class);
 
@@ -36,7 +38,7 @@ public class LoginServiceTest {
   }
 
   @Test
-  void testBuscarPorEmail_NaoEncontrado() {
+  void testBuscarPorEmailNaoEncontrado() {
     // Mock do repository
     LoginRepository mockRepository = mock(LoginRepository.class);
 
@@ -46,7 +48,7 @@ public class LoginServiceTest {
     LoginService service = new LoginService(mockRepository);
 
     // Deve lançar RuntimeException
-    RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+    UserNotFound exception = assertThrows(UserNotFound.class, () -> {
       service.buscarPorEmail("naoexiste@ex.com");
     });
 

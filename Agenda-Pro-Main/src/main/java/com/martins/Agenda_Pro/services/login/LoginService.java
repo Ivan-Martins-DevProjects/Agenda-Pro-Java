@@ -2,6 +2,7 @@ package com.martins.Agenda_Pro.services.login;
 
 import org.springframework.stereotype.Service;
 
+import com.martins.Agenda_Pro.errors.UserNotFound;
 import com.martins.Agenda_Pro.repository.login.LoginRepository;
 import com.martins.Agenda_Pro.repository.login.table.User;
 
@@ -20,6 +21,6 @@ public class LoginService {
   // no caso User, ele executa a query automaticamente
   public User buscarPorEmail(String email) {
     return repository.findByEmail(email)
-        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        .orElseThrow(() -> new UserNotFound(404, "Usuário não encontrado"));
   }
 }

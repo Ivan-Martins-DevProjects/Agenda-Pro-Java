@@ -1,8 +1,8 @@
 package com.martins.Agenda_Pro.errors;
 
-public class LoginException extends RuntimeException {
+public class LoginException extends MainError {
 
-  public LoginException(String message, Throwable cause) {
-    super(message, cause);
+  public LoginException(int status, String message) {
+    super(status, message);
   }
 }
