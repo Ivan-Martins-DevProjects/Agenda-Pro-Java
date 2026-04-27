@@ -1,21 +1,9 @@
 package com.martins.Agenda_Pro.controller.entities;
 
-import com.martins.Agenda_Pro.responses.ResponseModel;
+import com.martins.Agenda_Pro.responses.Response;
 
-public class LoginResponse implements ResponseModel {
-  private String status;
-  private String message;
-
-  public LoginResponse(String status, String token) {
-    this.status = status;
-    this.message = token;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public String getMessage() {
-    return message;
+public class LoginResponse extends Response {
+  public LoginResponse(String status, int statusCode, String token) {
+    super(null, status, statusCode, token);
   }
 }
