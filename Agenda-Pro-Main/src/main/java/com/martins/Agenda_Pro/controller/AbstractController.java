@@ -14,9 +14,6 @@ public class AbstractController {
   private ErrorHandler errorHandler;
 
   protected ResponseEntity<ResponseModel> createErrorResponse(Exception e) {
-    ResponseModel response = errorHandler.getResponse(e);
-    return ResponseEntity
-        .status(response.getStatusCode())
-        .body(response);
+    return errorHandler.getResponse(e);
   }
 }

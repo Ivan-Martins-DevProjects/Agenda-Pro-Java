@@ -23,7 +23,7 @@ public class PassworHashing {
     try {
       return argon2.verify(hash, passwordBytes);
     } catch (Exception e) {
-      throw new PasswordHashException(500, "Erro ao comparar senha");
+      throw new PasswordHashException("error", 500, "Erro ao comparar senha");
     } finally {
       if (passwordBytes != null) {
         argon2.wipeArray(passwordBytes);
@@ -38,7 +38,7 @@ public class PassworHashing {
     try {
       return argon2.hash(3, 65536, 1, passwordBytes);
     } catch (Exception e) {
-      throw new PasswordHashException(500, "Erro ao gerar hash da senha");
+      throw new PasswordHashException("error", 500, "Erro ao gerar hash da senha");
     } finally {
       if (passwordBytes != null) {
         argon2.wipeArray(passwordBytes);

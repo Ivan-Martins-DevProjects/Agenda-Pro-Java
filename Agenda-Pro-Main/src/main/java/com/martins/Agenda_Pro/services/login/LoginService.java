@@ -21,6 +21,6 @@ public class LoginService {
   // no caso User, ele executa a query automaticamente
   public User buscarPorEmail(String email) {
     return repository.findByEmail(email)
-        .orElseThrow(() -> new UserNotFound(404, "Usuário não encontrado"));
+        .orElseThrow(() -> new UserNotFound("error", 404, "Usuário não encontrado"));
   }
 }
